@@ -1,0 +1,45 @@
+ft_isalpha +
+ft_isdigit +
+ft_isalnum +
+ft_isascii +
+ft_isprint +
+ft_strlen +
+ft_memset +
+ft_bzero +
+ft_memcpy +
+ft_memmove +
+ft_strlcpy +
+ft_strlcat +
+ft_toupper +
+ft_tolower +
+ft_strchr +
+ft_strrchr +
+ft_strncmp +
+ft_memchr +
+ft_memcmp +
+ft_strnstr +
+ft_atoi +
+ft_calloc +-
+ft_strdup +
+
+ft_substr +
+ft_strjoin +
+
+ft_strtrim
+Parameters s1: The string to be trimmed.
+set: The reference set of characters to trim.
+Return value The trimmed string.
+NULL if the allocation fails.
+External functs. malloc
+Description Allocates (with malloc(3)) and returns a copy of
+’s1’ with the characters specified in ’set’ removed
+from the beginning and the end of the string.
+
+ft_split
+ft_itoa
+ft_strmapi
+ft_striteri
+ft_putchar_fd +
+ft_putstr_fd +
+ft_putendl_fd +
+ft_putnbr_fd +
