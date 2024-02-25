@@ -7,8 +7,12 @@ CFLAGS = -Wall -Wextra -Werror
 # This tells where the .c files are
 SRCS = $(filter-out main.c, $(shell ls *.c))
 
+BSRCS = $(filter-out $(SRCS), $(shell ls ft_lst*.c))
+
 # This tells that the .o files are same place as .c files
 OBJS = $(SRCS:.c=.o)
+
+BOBJS = $(BSRCS:.c=.o)
 
 # This is the name of the library
 NAME = libft.a
@@ -24,6 +28,9 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $@ $^
 
+bonus: $(OBJS) $(BOBJS)
+	ar rcs $(NAME) $?
+
 # removes the .o files
 clean:
 	rm -f $(OBJS)
@@ -35,6 +42,8 @@ fclean:
 
 # runs fclean and all again
 re: fclean all
+
+# bonus:
 
 # tells this targets do not represent files
 .PHONY: all clean fclean re
