@@ -20,10 +20,6 @@ NAME = libft.a
 # This creates the rule all, to build the library
 all: $(NAME)
 
-# This compiles all the .c files into .o files. Flag -c does not link the files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 # Archive .o files into a static library
 $(NAME): $(OBJS)
 	ar rcs $@ $^
@@ -31,13 +27,16 @@ $(NAME): $(OBJS)
 bonus: $(OBJS) $(BOBJS)
 	ar rcs $(NAME) $?
 
+# This compiles all the .c files into .o files. Flag -c does not link the files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 # removes the .o files
 clean:
 	rm -f $(OBJS) $(BOBJS)
 
 # removes the .o files and the static library
-fclean:
-	rm -f $(OBJS) $(BOBJS)
+fclean: clean
 	rm -f $(NAME)
 
 # runs fclean and all again
@@ -46,5 +45,5 @@ re: fclean all
 # bonus:
 
 # tells this targets do not represent files
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
 
