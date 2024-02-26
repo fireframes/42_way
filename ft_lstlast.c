@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 01:30:26 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/02/26 01:49:56 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:06:31 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_list	*ft_lstlast(t_list *lst)
 
 	node = lst;
 	while (node != NULL)
-	{	
+	{
 		if (node->next == NULL)
-			break;
+			break ;
 		node = node->next;
 	}
 	return (node);
