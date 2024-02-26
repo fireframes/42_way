@@ -5,9 +5,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # This tells where the .c files are
-SRCS = $(filter-out main.c, $(shell ls *.c))
+SRCS = $(filter-out $(BSRCS), $(shell ls *.c))
 
-BSRCS = $(filter-out $(SRCS), $(shell ls ft_lst*.c))
+BSRCS =  $(shell ls ft_lst*.c)
 
 # This tells that the .o files are same place as .c files
 OBJS = $(SRCS:.c=.o)
@@ -33,11 +33,11 @@ bonus: $(OBJS) $(BOBJS)
 
 # removes the .o files
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BOBJS)
 
 # removes the .o files and the static library
 fclean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BOBJS)
 	rm -f $(NAME)
 
 # runs fclean and all again
