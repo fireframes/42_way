@@ -32,3 +32,19 @@ valgrind:  package (e.g. libc6-dbg:i386).
 valgrind:  
 valgrind:  Cannot continue -- exiting now.  Sorry.
 
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list *node;
+
+	node = *lst;
+	if (node->next == NULL)
+	{
+		(*del)(node->content);
+		free(node);
+		*lst = NULL;
+		return ;
+	}
+	else
+		ft_lstclear(&node->next, (del)(node->next->content));
+
+}
