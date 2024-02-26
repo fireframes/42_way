@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 19:50:02 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/02/24 19:44:36 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:32:00 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ char	**ft_split(char const *s, char c)
 	size_t	len;
 	size_t	final_len;
 
+	if (s == NULL)
+		return (NULL);
 	len = ft_strlen(s);
 	split = (char **) malloc(sizeof(char *) * (len + 1));
 	s_cpy = ft_strdup(s);
-	if (split == NULL || s_cpy == NULL || c == '\0')
+	if (split == NULL)
 		return (NULL);
 	i = 0;
 	while (i < len)
