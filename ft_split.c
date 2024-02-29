@@ -6,65 +6,69 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 19:50:02 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/02/26 16:32:00 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/02/29 03:08:18 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
-static int	pop_arr(char **split, char *s_cpy, size_t len, size_t i)
+static void	pop_arr(char **split, const char *s, char c, size_t i)
 {
 	size_t	j;
-	size_t	is_sep;
+	size_t	word;
 	size_t	sub_len;
 
 	j = 0;
-	is_sep = 1;
+	word = 1;
 	sub_len = 0;
-	while (i < len + 1)
+	while (s[i])
 	{
-		if (s_cpy[i] == '\0' && !is_sep)
+		if (s[i] == c || s[i+1] == '\0')
 		{
-			split[j++] = ft_strdup((const char *) &s_cpy[i - sub_len]);
-			is_sep = 1;
-			sub_len = 0;
+			if (word)
+			{
+				split[j] = (char*) malloc(sizeof(char) * (sub_len + 1));
+				ft_strlcpy(split[j], &s[i - sub_len], sub_len + 1);
+				j++;
+				word = 0;
+				sub_len = 0;
+			}
 		}
-		else if (s_cpy[i] == '\0' && is_sep)
-			sub_len = 0;
 		else
 		{
+			word = 1;
 			sub_len++;
-			is_sep = 0;
 		}
 		i++;
 	}
-	return (j);
+	split[j] = NULL;
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**split;
-	char	*s_cpy;
 	size_t	i;
-	size_t	len;
-	size_t	final_len;
+	size_t	word_cnt = 0;
+	// int 	is_word = 0;
 
 	if (s == NULL)
 		return (NULL);
-	len = ft_strlen(s);
-	split = (char **) malloc(sizeof(char *) * (len + 1));
-	s_cpy = ft_strdup(s);
-	if (split == NULL)
-		return (NULL);
 	i = 0;
-	while (i < len)
+	while (s[i])
 	{
-		if (s_cpy[i] == c)
-			s_cpy[i] = '\0';
+		if (s[i] != c)
+		{
+			if (i == 0 || s[i - 1] == c)
+				word_cnt++;
+		}
 		i++;
 	}
-	final_len = pop_arr(split, s_cpy, len, 0);
-	while (final_len < len)
-		free(split[final_len++]);
+	printf("WORD CNT: %zu\n", word_cnt);
+	split = (char **) malloc(sizeof(char *) * (word_cnt + 1));
+	if (split == NULL)// || s == NULL)
+		return (NULL);
+	pop_arr(split, s, c, 0);
+	// free(s);
 	return (split);
 }
